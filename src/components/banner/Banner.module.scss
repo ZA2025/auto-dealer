@@ -1,3 +1,5 @@
+@use '../../styles/variables.scss' as *;
+
 .banner {
     position: relative;
     width: 100%;
@@ -24,24 +26,26 @@
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
-        color: #fff;
+        color: $white;
         z-index: 1;
         
     }
 
     &Button {
         position: relative;
-        background-color: #0085ac;
+        background-color: $blue;
         padding: 20px 30px;
         border-radius: 50px;
         color: #fff;
-        border: 1px solid #0085ac;
+        border: 1px solid $blue;
         margin-top: 20px;
         display: inline-block;
+        z-index: 1;
+        
         &:hover {
-            background-color: #000;
-            color: #fff;
-            border: 1px solid #fff;
+            background-color: $black;
+            color: $white;
+            border: 1px solid $white;
         }
     }
 

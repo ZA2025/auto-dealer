@@ -18,7 +18,8 @@ const Carousel = () => {
 
     const [sliderData, setSliderData] = useState<Slide[]>([]);
     const [loading, setLoading] = useState(true);
-    
+    const [error, setError] = useState<string | null>(null); // Added error state
+
     useEffect(() => {
         const apiKey = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY;
         const spreadsheetId = process.env.NEXT_PUBLIC_SLIDER_SPREADSHEET_ID;
@@ -27,7 +28,11 @@ const Carousel = () => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`); // Added error handling for non-200 responses
+                }
                 const data = await response.json();
+                console.log(data);
                 if (data.values) {
                     const [headers, ...rows] = data.values; // Destructure headers and rows
                     const headerMap = headers.reduce((acc: { [key: string]: number }, key: string, index: number) => {
@@ -46,9 +51,15 @@ const Carousel = () => {
                     setSliderData(formattedData);
                 } else {
                     console.error('No data found in the sheet');
+                    setError('No data found in the sheet'); // Set error state
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
+                if (error instanceof Error) {
+                    setError(error.message); // Set error state
+                } else {
+                    setError(String(error)); // Handle non-Error objects
+                }
             } finally {
                 setLoading(false);
             }
@@ -90,6 +101,8 @@ const Carousel = () => {
                 <h2 className={styles.sliderTitle}>Continue Exploring</h2>
                 {loading ? (
                     <p>Loading...</p>
+                ) : error ? ( // Display error message if there is an error
+                    <p>Error: {error}</p>
                 ) : (
                     <Slider {...settings}>
                         {sliderData.map((slide) => (
@@ -99,7 +112,6 @@ const Carousel = () => {
                                     <h3 className={styles.slideTitle}>{slide.title}</h3>
                                     <p className={styles.slideText}>{slide.description}</p>
                                     <p>{slide.price}</p>
-                                    {/*<a href="#" className={styles.slideLink}>Learn More</a>*/}
                                     <Link href={`/slides/${slide.id}`} className={styles.slideLink}>
                                         Find out more
                                     </Link>

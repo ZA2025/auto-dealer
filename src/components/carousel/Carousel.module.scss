@@ -1,3 +1,4 @@
+@use '../../styles/variables.scss' as *;
 
 .slider {
     position: relative;
@@ -22,7 +23,7 @@
         padding: 0 10px;
     }
     &:hover {
-        border: 1px solid #0085ac;
+        border: 1px solid $blue;
         //.slideImg {
         //    transform: scale(1.1);  
         //}
@@ -40,16 +41,16 @@
     &Link {
         padding: 10px 20px;
         position: relative;
-        background-color: #0085ac;
+        background-color: $blue;
         padding: 10px 20px;
         border-radius: 50px;
-        color: #fff;
-        border: 1px solid #0085ac;
+        color: $white;
+        border: 1px solid $blue;
         margin-top: 20px;
         display: inline-block;
         &:hover {
-            background-color: #fff;
-            color: #0085ac;
+            background-color: $white;
+            color: $blue;
         }
     }
 
