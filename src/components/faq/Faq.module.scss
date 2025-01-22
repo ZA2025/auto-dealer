@@ -1,0 +1,46 @@
+@use '../../styles/variables.scss' as *;
+.faq {
+    padding: 50px 0;
+    .faqItem {
+        margin-bottom: 1rem;
+        border: 1px solid #ebebeb;
+        padding: 20px;
+    }
+
+    .question {
+        background-color: transparent;
+        border: 0;
+        line-height: 1.5;
+        font-family: 'Archivo Black', sans-serif;
+        text-align: left;
+        font-size: 1rem;
+        position: relative;
+
+        &:hover {
+            color: #3084aa;
+        }
+
+        h3 {
+            margin: 0;
+        }
+
+        .icon {
+            font-size: 1.5rem;
+        }
+    }
+
+    .answer {
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        padding: 0;
+        transition: height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+        
+    }
+
+    .answerOpen {
+        height: auto;
+        opacity: 1;
+        padding: 1rem 0;
+    }
+}

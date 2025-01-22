@@ -1,0 +1,27 @@
+.learnMore {
+    position: relative;
+    border-bottom: 1px solid #efefef;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+
+    &ContentWrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;  
+    }
+
+    &Col {
+        width: 100%;
+        @media screen and (min-width: 768px) {
+            width: calc((100% - 20px) / 2);
+        }
+        &.text {
+            padding: 40px 0;
+        }
+    }
+    &Image {
+        width: 100%;
+        display: block;
+    }
+}

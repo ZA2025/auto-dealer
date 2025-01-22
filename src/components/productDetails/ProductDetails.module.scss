@@ -1,0 +1,15 @@
+.productDetails{
+    &Wrap {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    &Col {
+        width: calc((100% - 20px) / 2);
+    }
+    &Image {
+        width: 100%;
+        display: block;
+    }
+}

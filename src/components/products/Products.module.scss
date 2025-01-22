@@ -1,0 +1,65 @@
+@use '../../styles/variables.scss' as *;
+
+.products {
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    .cardLink {
+        padding: 10px 20px;
+       
+        background-color: #0085ac;
+        padding: 10px 20px;
+        border-radius: 50px;
+        color: #fff;
+        border: 1px solid #0085ac;
+        margin-top: 20px;
+        display: inline-block;
+        &:hover {
+            background-color: #fff;
+            color: #0085ac;
+        }
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            inset: 0;
+        }
+    }
+    &Card {
+        position: relative;
+        width: 100%;
+        justify-content: space-between;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        box-sizing: border-box;
+        border: 1px solid #f0eeee;
+        @media screen and (min-width: 500px) {
+            width: calc((100% - 20px) / 2);
+            
+        }
+        @media screen and (min-width: 1024px) {
+            width: calc((100% - 60px) / 4);
+            
+        }
+         
+    }
+
+    &Image {
+        width: 100%;
+        display: block;
+    }
+
+    &Price {
+        font-size: 20px;
+        font-weight: bold;
+
+    }
+    
+    &Info {
+        //background-color: $blue;
+        padding: 20px;
+    }
+}

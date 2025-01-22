@@ -1,0 +1,88 @@
+:root {
+    --foreground: #333; 
+    --background: #fff;
+}
+html {
+    &.navOpen {
+      overflow: hidden;
+    }
+}
+body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 500;
+    font-size: 2.5rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.inner-section {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 50px 20px;
+    @media screen and (min-width: 1280px) {
+        padding: 50px 20px;
+    }
+}
+
+.loginButton {
+    margin-top: 30px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid #000;
+    border-radius: 50px;
+    &:hover {
+        background-color: #000;
+        color: #fff;
+        border: 1px solid #fff;
+    }
+    img {
+        width: 20px;
+        height: 20px;
+    }
+}

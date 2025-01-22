@@ -1,0 +1,63 @@
+
+.slider {
+    position: relative;
+    &Wrap {
+        padding: 50px 0 ;
+    }
+     
+    &Container {
+        border: 1px dashed red;
+    }
+    &Title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    
+}
+.slide {
+    padding: 0;
+    @media screen and (min-width: 768px) {
+        padding: 0 10px;
+    }
+    &:hover {
+        border: 1px solid #0085ac;
+        //.slideImg {
+        //    transform: scale(1.1);  
+        //}
+    }
+    
+    &Img {
+        width: 100%;
+        height: 100%;
+    }
+
+    &InfoWrap {
+        padding: 20px 30px;
+        text-align: center;
+    }
+    &Link {
+        padding: 10px 20px;
+        position: relative;
+        background-color: #0085ac;
+        padding: 10px 20px;
+        border-radius: 50px;
+        color: #fff;
+        border: 1px solid #0085ac;
+        margin-top: 20px;
+        display: inline-block;
+        &:hover {
+            background-color: #fff;
+            color: #0085ac;
+        }
+    }
+
+    &Title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+}
+ 
+
