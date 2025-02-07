@@ -5,7 +5,7 @@ const AdminPage = () => {
     return (
         <div>
             <div className="inner-section">
-                <h1>Admin Login</h1>
+
                 <LoginForm />
             </div>
         </div>
