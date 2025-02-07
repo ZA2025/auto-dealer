@@ -1,75 +1,151 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import styles from './Subscribe.module.scss';
+import React, { useState } from "react";
 
-const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+const Subscribe = () => {
+    // State for form fields
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+    });
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY;
-      const spreadsheetId = process.env.NEXT_PUBLIC_SPREADSHEET_ID;
-      const range = 'Sheet1'; // Fetch all data from Sheet1
+    // State for errors
+    const [errors, setErrors] = useState({
+        name: "",
+        email: "",
+    });
 
-      const sheetURL = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
+    // State for success message
+    const [successMessage, setSuccessMessage] = useState("");
 
-      try {
-        const response = await fetch(sheetURL);
-        const data = await response.json();
-
-        if (data.values) {
-          const [headers, ...rows] = data.values; // Destructure headers and rows
-          const headerMap = headers.reduce((acc, key, index) => {
-            acc[key] = index;
-            return acc;
-          }, {});
-
-          const formattedData = rows.map((row) => ({
-            id: row[headerMap['id']] || 'No id',
-            name: row[headerMap['name']] || 'No name',
-            description: row[headerMap['description']] || 'No description',
-            price: row[headerMap['price']] || 'No price',
-            images: row[headerMap['image']] ? row[headerMap['image']].split(',') : [], // Split the image URLs by comma
-          }));
-
-          setProducts(formattedData);
-        } else {
-          console.error('No data found in the sheet');
+    // Validation function
+    const validateField = (name, value) => {
+        let error = "";
+        if (name === "name" && !value.trim()) {
+            error = "Name is required.";
         }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
+        if (name === "email") {
+            if (!value.trim()) {
+                error = "Email is required.";
+            } else if (!/\S+@\S+\.\S+/.test(value)) {
+                error = "Email is not valid.";
+            }
+        }
+        return error;
     };
 
-    fetchProducts();
-  }, []);
+    // Handle input change
+    const handleChange = (e) => {
+        const { name, value } = e.target;
 
-  if (loading) return <div className='inner-section'><p>Loading...</p></div>;
+        // Update field value
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
 
-  return (
-    <div className={styles.products}>
-      {products.map((product) => (
-        <div key={product.id} className={styles.productsCard}>
-          {product.images.length > 0 && (
-            <img src={product.images[0]} alt={product.name} className={styles.productsImage} /> // Display only the first image
-          )}
-          <div className={styles.productsInfo}>
-            <h2 className={styles.productsTitle}>{product.name}</h2>
-            <p className={styles.productsText}>{product.description}</p>
-            <p><span className={styles.productsPrice}>{product.price}</span></p>
-            <Link href={`/cars/${product.id}`} className={styles.cardLink}>
-              Find out more
-            </Link>
-          </div>
+        // Validate the field and update errors
+        setErrors((prev) => ({
+            ...prev,
+            [name]: validateField(name, value),
+        }));
+    };
+
+    // Handle form submission
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // Validate all fields
+        const newErrors = {
+            name: validateField("name", formData.name),
+            email: validateField("email", formData.email),
+        };
+
+        setErrors(newErrors);
+
+        // Check if there are no errors
+        const isValid = !Object.values(newErrors).some((error) => error);
+        if (isValid) {
+            try {
+                // Create a FormData object to send as form-encoded
+                const formDataToSend = new URLSearchParams();
+                formDataToSend.append('Name', formData.name);
+                formDataToSend.append('Email', formData.email);
+
+                const googleScriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
+                if (!googleScriptUrl) {
+                    console.error("Google Script URL is not defined.");
+                    return;
+                }
+
+                const response = await fetch(googleScriptUrl, {
+                    method: 'POST',
+                    body: formDataToSend, // Send as form data (URL-encoded)
+                });
+
+                if (response.ok) {
+                    setSuccessMessage("Thank you for subscribing!");
+                    // Clear form fields
+                    setFormData({
+                        name: "",
+                        email: "",
+                    });
+                    // Clear success message after 3 seconds
+                    setTimeout(() => {
+                        setSuccessMessage("");
+                    }, 3000);
+                } else {
+                    console.error("Error submitting form: ", response.statusText);
+                }
+            } catch (error) {
+                console.error("Error submitting form: ", error);
+            }
+        }
+    };
+
+    return (
+        <div className={styles.subscribe}>
+            <div className={styles.subscribeContent}>
+                {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <div className={styles.formRow}>
+                        <label htmlFor='name' className={styles.formLabel}>
+                            Name
+                            <span>*</span>
+                        </label>
+                        <input
+                            className={styles.formInput}
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                        />
+                        {errors.name && <span className={styles.error}>{errors.name}</span>}
+                    </div>
+                    <div className={styles.formRow}>
+                        <label htmlFor='email' className={styles.formLabel}>
+                            Email
+                            <span>*</span>
+                        </label>
+                        <input
+                            className={styles.formInput}
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                        />
+                        {errors.email && <span className={styles.error}>{errors.email}</span>}
+                    </div>
+                    <div className={styles.formRow}>
+                        <input className={styles.formSubmit} type="submit" value="Subscribe" />
+                    </div>
+                </form>
+            </div>
         </div>
-      ))}
-    </div>
-  );
+    );
 };
 
-export default Products;
+export default Subscribe;
