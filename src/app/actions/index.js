@@ -1,4 +1,4 @@
-'use server'; // Required for server actions
+'use server'; 
 import { signIn, signOut } from '@/auth'; // Import signIn and signOut from auth.js
 
 // Login action

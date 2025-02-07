@@ -16,16 +16,7 @@ const authOptions = {
                 },
             },
         }),
-    ],
-    callbacks: {
-        //async signIn({ user }) {
-        //    // Only allow sign-ins from the admin email
-        //    if (user.email !== adminEmail) {
-        //        return false; // Reject users who aren't the admin
-        //    }
-        //    return true;
-        //},
-    },
+    ]
 };
 
 // Export required objects

@@ -1,33 +1,4 @@
-//.customPaging {
-//    position: relative;
-//    width: 100%;
-//    border: 1px solid #000;
 
-//    .container {
-//        border: 1px dashed #000;
-//        display: flex;
-//        flex-wrap: wrap;
-//        gap: 20px;
-//    }
-
-//    &Col {
-//        position: relative;
-//        width: 100%;
-//        @media screen and (min-width: 768px) {
-//            width: calc((100% - 40px) / 2);
-//        }
-//        &.right {
-//            text-align: left;
-//            padding-top: 30px;
-//        }
-//        &.left {
-//            color: gray;
-//        }
-//    }
-//    .slick-dots {
-//        background-color: red !important;
-//    }
-//}
 .customPaging {
     .slick-dots {
       display: flex !important;
