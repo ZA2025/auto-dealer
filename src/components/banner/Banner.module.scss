@@ -1,5 +1,6 @@
 @use '../../styles/variables.scss' as *;
-
+@use '../../styles/mixins.scss' as *;
+ 
 .banner {
     position: relative;
     width: 100%;
@@ -32,21 +33,7 @@
     }
 
     &Button {
-        position: relative;
-        background-color: $blue;
-        padding: 20px 30px;
-        border-radius: 50px;
-        color: #fff;
-        border: 1px solid $blue;
-        margin-top: 20px;
-        display: inline-block;
-        z-index: 1;
-        
-        &:hover {
-            background-color: $black;
-            color: $white;
-            border: 1px solid $white;
-        }
+       @include primary-boutton;
     }
 
     &Title {

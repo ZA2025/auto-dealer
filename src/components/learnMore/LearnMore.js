@@ -2,30 +2,18 @@
 import { useState, useEffect } from 'react';
 import styles from './LearnMore.module.scss';
 
-interface LearnMoreProps {
-    apiEndpoint: string;
-}
-
-const LearnMore = ({ apiEndpoint }: LearnMoreProps) => {
-
-    interface Data {
-        title: string;
-        text: string;
-        image: string;
-    }
-
-    const [data, setData] = useState<Data | null>(null);
+const LearnMore = ({ apiEndpoint }) => {
+    const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
-            
             try {
                 const response = await fetch(apiEndpoint);
                 const result = await response.json();
                 if (result.values) {
                     const rows = result.values.slice(1);
-                    const formattedData = rows.map((row: string[]) => ({
+                    const formattedData = rows.map((row) => ({
                         title: row[0] || 'No title',
                         text: row[1] || 'No text',
                         image: row[2] || '',
@@ -34,8 +22,6 @@ const LearnMore = ({ apiEndpoint }: LearnMoreProps) => {
                     setData(formattedData[0]);
                     console.log(result);
                 }
-                 
-
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {

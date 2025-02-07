@@ -1,14 +1,12 @@
 @use '../../styles/variables.scss' as *;
+@use '../../styles/mixins.scss' as *;
 
 .slider {
     position: relative;
     &Wrap {
         padding: 50px 0 ;
     }
-     
-    &Container {
-        border: 1px dashed red;
-    }
+    
     &Title {
         font-size: 2rem;
         font-weight: 700;
@@ -39,19 +37,7 @@
         text-align: center;
     }
     &Link {
-        padding: 10px 20px;
-        position: relative;
-        background-color: $blue;
-        padding: 10px 20px;
-        border-radius: 50px;
-        color: $white;
-        border: 1px solid $blue;
-        margin-top: 20px;
-        display: inline-block;
-        &:hover {
-            background-color: $white;
-            color: $blue;
-        }
+        @include secondary-button;
     }
 
     &Title {

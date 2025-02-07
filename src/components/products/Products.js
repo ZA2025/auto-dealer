@@ -4,16 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './Products.module.scss';
 
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-  imageUrl: string;
-}
-
 const Products = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,14 +21,18 @@ const Products = () => {
         const data = await response.json();
 
         if (data.values) {
-          // Extract rows (skipping the header row)
-          const rows = data.values.slice(1); // Assumes the first row is the header
-          const formattedData = rows.map((row: string[]) => ({
-            id: row[0] || 'No id', // Adjust index based on your column order
-            name: row[1] || 'No name',
-            description: row[2] || 'No description',
-            price: row[3] || 'No price',
-            imageUrl: row[4] || '',
+          const [headers, ...rows] = data.values; // Destructure headers and rows
+          const headerMap = headers.reduce((acc, key, index) => {
+            acc[key] = index;
+            return acc;
+          }, {});
+
+          const formattedData = rows.map((row) => ({
+            id: row[headerMap['id']] || 'No id',
+            name: row[headerMap['name']] || 'No name',
+            description: row[headerMap['description']] || 'No description',
+            price: row[headerMap['price']] || 'No price',
+            images: row[headerMap['image']] ? row[headerMap['image']].split(',') : [], // Split the image URLs by comma
           }));
 
           setProducts(formattedData);
@@ -59,7 +55,9 @@ const Products = () => {
     <div className={styles.products}>
       {products.map((product) => (
         <div key={product.id} className={styles.productsCard}>
-          {product.imageUrl && <img src={product.imageUrl} alt={product.name} className={styles.productsImage} />}
+          {product.images.length > 0 && (
+            <img src={product.images[0]} alt={product.name} className={styles.productsImage} /> // Display only the first image
+          )}
           <div className={styles.productsInfo}>
             <h2 className={styles.productsTitle}>{product.name}</h2>
             <p className={styles.productsText}>{product.description}</p>

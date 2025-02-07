@@ -3,15 +3,10 @@
 import React, { useState, useEffect } from "react";
 import styles from './Faq.module.scss';
 
-interface FaqItem {
-    question: string;
-    answer: string;
-}
-
 const Faq = () => {
-    const [faqItems, setFaqItems] = useState<FaqItem[]>([]);
+    const [faqItems, setFaqItems] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [openIndex, setOpenIndex] = useState<number | null>(null);
+    const [openIndex, setOpenIndex] = useState(null);
 
     useEffect(() => {
         const apiKey = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY;
@@ -26,7 +21,7 @@ const Faq = () => {
                 if (data.values) {
                     // Assuming the first row is the header
                     const rows = data.values.slice(1);
-                    const formattedData = rows.map((row: string[]) => ({
+                    const formattedData = rows.map((row) => ({
                         question: row[0] || 'No question',
                         answer: row[1] || 'No answer',
                     }));
@@ -45,7 +40,7 @@ const Faq = () => {
         fetchData();
     }, []);
 
-    const toggleOpen = (index: number) => {
+    const toggleOpen = (index) => {
         setOpenIndex(openIndex === index ? null : index);
     };
 

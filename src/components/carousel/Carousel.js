@@ -8,17 +8,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Carousel = () => {
-    interface Slide {
-        id: string;
-        title: string;
-        description: string;
-        price: string;
-        image: string;
-    }
-
-    const [sliderData, setSliderData] = useState<Slide[]>([]);
+    const [sliderData, setSliderData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null); // Added error state
+    const [error, setError] = useState(null); // Added error state
 
     useEffect(() => {
         const apiKey = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY;
@@ -35,12 +27,12 @@ const Carousel = () => {
                 console.log(data);
                 if (data.values) {
                     const [headers, ...rows] = data.values; // Destructure headers and rows
-                    const headerMap = headers.reduce((acc: { [key: string]: number }, key: string, index: number) => {
+                    const headerMap = headers.reduce((acc, key, index) => {
                         acc[key] = index;
                         return acc;
                     }, {});
 
-                    const formattedData = rows.map((row: string[]) => ({
+                    const formattedData = rows.map((row) => ({
                         id: row[headerMap['id']] || 'No id',
                         title: row[headerMap['title']] || 'No title',
                         description: row[headerMap['description']] || 'No description',
@@ -55,11 +47,7 @@ const Carousel = () => {
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
-                if (error instanceof Error) {
-                    setError(error.message); // Set error state
-                } else {
-                    setError(String(error)); // Handle non-Error objects
-                }
+                setError(error.message); // Set error state
             } finally {
                 setLoading(false);
             }

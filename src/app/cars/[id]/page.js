@@ -1,6 +1,8 @@
 "use client";
 import ProductDetails from '@/components/productDetails/ProductDetails';
 import Carousel from '@/components/carousel/Carousel';
+//import ImageCarousel from '@/components/imageCarousel/ImageCarousel';
+import CustomPaging from '@/components/customPaging/CustomPaging';
 
 const CarDetailsPage = () => {
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY;
@@ -11,8 +13,9 @@ const CarDetailsPage = () => {
 
     return (
         <>
-            <ProductDetails apiUrl={apiUrl} />
-            <Carousel />
+            <CustomPaging apiUrl={apiUrl} />
+            {/*<ImageCarousel apiUrl={apiUrl} />*/}
+            {/*<ProductDetails apiUrl={apiUrl} />*/}
         </>
     );
 };
