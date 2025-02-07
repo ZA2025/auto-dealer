@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import styles from './Products.module.scss';
+import styles from './Subscribe.module.scss';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
