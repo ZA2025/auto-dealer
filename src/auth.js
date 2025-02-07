@@ -1,8 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
-
 const authOptions = {
     providers: [
         GoogleProvider({
