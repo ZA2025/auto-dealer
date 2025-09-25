@@ -1,15 +1,14 @@
 'use client';
-import LoginForm from "@/components/loginForm/LoginForm";
+import React, { Suspense } from 'react';
+import LoginForm from '@/components/loginForm/LoginForm';
 
-const AdminPage = () => {
-    return (
-        <div>
-            <div className="inner-section">
-
-                <LoginForm />
-            </div>
+export default function Page() {
+  return (
+    <Suspense fallback={<div />}>
+        <div className="inner-section">
+            <LoginForm />
         </div>
-    );
-};
-
-export default AdminPage;
+      
+    </Suspense>
+  );
+}
