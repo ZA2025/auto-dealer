@@ -28,7 +28,9 @@ const Header = () => {
         <header className={styles.header}>
             <nav className={styles.nav}>
                 <div className={styles.navLogoContainer}>
-                    <img src="/images/car.svg" alt="logo" className={styles.navLogo} />
+                    {/* <img src="/images/Autogalerie.png" alt="logo" className={styles.navLogo} /> */}
+                    <span className={styles.navTitle} >Auto-Galerie Trier</span>
+
                 </div>
                 <ul className={`${styles.navList} ${isOpen ? styles.navListOpen : ''}`}>
                     <li className={styles.navItem}><Link className={styles.navLink} href="/" onClick={closeMenu}>Home</Link></li>
@@ -36,7 +38,7 @@ const Header = () => {
                     <li className={styles.navItem}><Link className={styles.navLink} href="/newsletter" onClick={closeMenu}>Newsletter</Link></li>
                     <li className={styles.navItem}><Link className={styles.navLink} href="/cars" onClick={closeMenu}>Cars</Link></li>
                     <li className={styles.navItem}>
-                        <Link className={styles.navLink} href="/admin" onClick={closeMenu}>
+                        <Link className={styles.navLink} href="/login" onClick={closeMenu}>
                             <img src="/icons/admin.svg" alt="lock" className={styles.navAdmin} />
                         </Link>
                     </li>

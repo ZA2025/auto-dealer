@@ -1,0 +1,71 @@
+@use '../../styles/mixins.scss' as *;
+
+.reviews {
+    position: relative;
+    width: 100%;
+     
+    &Content {
+        width: 100%;
+        text-align: center;
+        margin: 0 auto;
+        
+        @media screen and (min-width: 768px) {
+            max-width: 50%;
+        }
+    }
+    &List {
+        position: relative;
+    }
+    &BtnContainer {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 30px 0;
+    }
+    &Btn {
+        @include black-button;
+    }
+
+    .reviewsCard {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 1rem;
+        border-radius: .1875rem;
+        box-sizing: border-box;
+        text-align: center;
+        &Header {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin-top: -1rem;
+            padding-top: 1rem;
+            // margin-inline: -1rem;
+            // padding-inline: 1rem;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: content-box;
+        }
+
+        .review {
+            // border: 1px dashed black;
+        }
+        .rating {
+            // border: 1px dashed black;
+        }
+        .name{
+            // border: 1px dashed black;
+        }
+         
+        .date {
+            // border: 1px dashed black;
+            margin-top: auto;
+        }
+    }
+}
+ 
+

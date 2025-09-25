@@ -100,7 +100,7 @@ const Carousel = () => {
                                     <h3 className={styles.slideTitle}>{slide.title}</h3>
                                     <p className={styles.slideText}>{slide.description}</p>
                                     <p>{slide.price}</p>
-                                    <Link href={`/slides/${slide.id}`} className={styles.slideLink}>
+                                    <Link href={`/cars/${slide.id}`} className={styles.slideLink}>
                                         Find out more
                                     </Link>
                                 </div>

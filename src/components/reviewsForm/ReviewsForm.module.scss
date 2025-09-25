@@ -1,0 +1,84 @@
+@use '../../styles/mixins.scss' as *;
+
+.reviewsFormContainer {
+    position: relative;
+    background-color: #0285ac;
+    color: white;
+
+}
+.reviewsForm {
+    padding: 50px 0;
+    width: 100%; 
+    padding: 50px 0px;
+     
+    .formGrid {
+        display: grid;
+        grid-template-columns: 1;
+        gap: .5rem;
+        @media screen and (min-width: 768px) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+    .formGroup {
+        display: flex;
+    }
+    label {
+        display: block;
+        display: none;
+    }
+    input, select {
+        width: 100%;
+        font-size: 1rem;
+        line-height: 1.5;
+        padding: .693rem .75em;
+        color: #000;
+        box-sizing: border-box;
+        background-color: #fff;
+        border: 1px solid #ebebeb;
+    }
+    textarea {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.5;
+        padding: .693rem .75em;
+        box-sizing: border-box;
+        color: #000;
+        background-color: #fff;
+        border: 1px solid #ebebeb;
+    }
+    .column {
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        height: 100%;
+        // margin-bottom: 20px;
+    }
+    .formGroupTextarea {
+        height: 100%;
+        margin-bottom: 40px;
+    }
+    &Button {
+        @include black-button;
+    }
+
+    // Style select arrow like FAQ chevron
+    select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6 9l6 6 6-6' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 16px 16px;
+        padding-right: 40px;
+    }
+     
+    .row {
+        display: flex;
+        width: 100%;
+    }
+}

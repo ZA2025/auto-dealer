@@ -3,6 +3,7 @@ import ProductDetails from '@/components/productDetails/ProductDetails';
 import Carousel from '@/components/carousel/Carousel';
 //import ImageCarousel from '@/components/imageCarousel/ImageCarousel';
 import CustomPaging from '@/components/customPaging/CustomPaging';
+import ContactUs from '@/components/contactUs/ContactUs';
 
 const CarDetailsPage = () => {
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY;
@@ -14,6 +15,7 @@ const CarDetailsPage = () => {
     return (
         <>
             <CustomPaging apiUrl={apiUrl} />
+            <ContactUs />
             {/*<ImageCarousel apiUrl={apiUrl} />*/}
             {/*<ProductDetails apiUrl={apiUrl} />*/}
         </>

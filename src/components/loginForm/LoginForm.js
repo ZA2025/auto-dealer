@@ -1,24 +1,34 @@
 "use client";
-
+import React, { useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { useRouter, usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 const LoginForm = () => {
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const router = useRouter();
     const pathname = usePathname();
-
+    const searchParams = useSearchParams();
+    const error = searchParams.get("error");
+    console.log(session)
     useEffect(() => {
-        if (!session) return; // Avoid running logic if the session isn't loaded
+        if (status === "loading") return; // Don't run logic while session is loading
 
-        if (session?.user?.email) {
-            console.log("Redirecting to /home");
-            router.push("/home");
-        } else if (pathname !== "/") {
-            router.push("/");
+        console.log("Session status:", status);
+        console.log(session)
+        if (!session) {
+            console.log("User is not authenticated. Redirecting to login...");
+            return;
         }
-    }, [session, router, pathname]);
+
+        if (!session.user?.isAdmin) {
+            console.log("User is not an admin. Redirecting to login with error...");
+            router.replace("/login?error=AccessDenied");
+            return;
+        }
+
+        console.log("Admin authenticated. Redirecting to home...");
+        router.replace("/home"); // Redirect admins to home
+    }, [session, status, router, pathname]);
 
     const handleSignIn = async () => {
         await signIn("google");
@@ -30,9 +40,9 @@ const LoginForm = () => {
 
     return (
         <div>
+            {error && <p className="error-message">Access Denied: You do not have permission to sign in.</p>}
             {session ? (
                 <button className="loginButton" onClick={handleSignOut}>
-
                     Sign out
                 </button>
             ) : (

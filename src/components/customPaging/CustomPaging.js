@@ -60,17 +60,7 @@ const CustomPaging = ({ apiUrl }) => {
     }, [id, apiUrl]);
 
     const settings = {
-        customPaging: function(i) {
-            return (
-                <a>
-                    <img
-                        src={sliderImages[i]}
-                        alt={`Thumbnail ${i + 1}`}
-                        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                    />
-                </a>
-            );
-        },
+        autoplay: true, 
         dots: true,
         infinite: sliderImages.length > 1,
         speed: 500,
@@ -80,35 +70,37 @@ const CustomPaging = ({ apiUrl }) => {
 
     return (
         <div className={styles.customPaging}>
-            <div className="inner-section">
-                <h1>Slider 2</h1>
-                <div className={styles.container}>
-                    <div className="slider-container">
-                        {loading ? (
-                            <p>Loading...</p>
-                        ) : error ? (
-                            <p>Error: {error}</p>
-                        ) : (
-                            <Slider {...settings} className={styles.customPaging}>
-                                {sliderImages.map((image, index) => (
-                                    <div key={index}>
-                                        <img src={image} alt={`Slide ${index + 1}`} style={{ width: '100%', height: 'auto' }} />
-                                    </div>
-                                ))}
-                            </Slider>
-                        )}
-                    </div>
-                    <div>
-                        {sliderData && (
-                            <>
-                                <h2>{sliderData.name}</h2>
-                                <p>{sliderData.description}</p>
-                                <p>{sliderData.price}</p>
-                            </>
-                        )}
-                    </div>
-                </div>
+            <div className={styles.customPagingContainer}>
+                <section className={styles.customPagingLeft}>
+                {loading ? (
+                        <p>Loading...</p>
+                    ) : error ? (
+                        <p>Error: {error}</p>
+                    ) : (
+                        <Slider {...settings}>
+                            {sliderImages.map((image, index) => (
+                                <div key={index}>
+                                    <img src={image} alt={`Slide ${index + 1}`} style={{ width: '100%', height: 'auto' }} />
+                                </div>
+                            ))}
+                        </Slider>
+                    )}
+                </section>
+                <section className={styles.customPagingRight}>
+                    {sliderData && (
+                        <div>
+                            <h2>{sliderData.name}</h2>
+                            <p>{sliderData.description}</p>
+                            <p>{sliderData.price}</p>
+                        </div>
+                    )}
+                </section>
             </div>
+            <div className={styles.additional}>
+                
+            </div>
+             
+            
         </div>
     );
 };

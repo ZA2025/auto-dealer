@@ -38,10 +38,11 @@ export default function RootLayout({ children }) {
         
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <SessionProvider>
         <Header />
-        <SessionProvider>{children}</SessionProvider>
-        
+          {children} 
         <Footer />
+        </SessionProvider>
       </body>
     </html>
   );

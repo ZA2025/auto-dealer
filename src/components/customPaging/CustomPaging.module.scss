@@ -1,39 +1,16 @@
-
-.customPaging {
-    .slick-dots {
-      display: flex !important;
-      justify-content: center !important;
-      margin-top: 20px !important;
-      list-style: none !important;
-      padding: 0 !important;
-  
-      li {
-        margin: 0 5px !important;
-  
-        &.slick-active {
-          button {
-            border: 2px solid #0070f3 !important;
-          }
-        }
-  
-        button {
-          display: inline-block !important;
-          width: 50px !important;
-          height: 50px !important;
-          padding: 0 !important;
-          border: 1px solid #ccc !important;
-          border-radius: 5px !important;
-          overflow: hidden !important;
-          background-color: transparent !important;
-          cursor: pointer !important;
-  
-          img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-          }
-        }
-      }
-    }
+ .customPaging {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 0;
+  &Container {
+    display: flex;
   }
-  
+  &Left {
+    width: 60%;
+  }
+  &Right {
+    width: 30%;
+    padding: 30px;
+  }
+ }

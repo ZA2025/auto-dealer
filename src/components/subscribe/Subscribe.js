@@ -107,42 +107,49 @@ const Subscribe = () => {
     return (
         <div className={styles.subscribe}>
             <div className={styles.subscribeContent}>
+                <div className={styles.subscribeWrap}>
+                <h1>Subscribe to our newsletter</h1>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
                 {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <div className={styles.formRow}>
-                        <label htmlFor='name' className={styles.formLabel}>
-                            Name
-                            <span>*</span>
-                        </label>
                         <input
                             className={styles.formInput}
                             type="text"
                             id="name"
                             name="name"
+                            placeholder="Name"
+                            aria-label="Name"
                             value={formData.name}
                             onChange={handleChange}
                         />
                         {errors.name && <span className={styles.error}>{errors.name}</span>}
                     </div>
                     <div className={styles.formRow}>
-                        <label htmlFor='email' className={styles.formLabel}>
-                            Email
-                            <span>*</span>
-                        </label>
                         <input
                             className={styles.formInput}
                             type="email"
                             id="email"
                             name="email"
+                            placeholder="Email"
+                            aria-label="Email"
                             value={formData.email}
                             onChange={handleChange}
                         />
                         {errors.email && <span className={styles.error}>{errors.email}</span>}
                     </div>
                     <div className={styles.formRow}>
-                        <input className={styles.formSubmit} type="submit" value="Subscribe" />
+                    <button
+                        type="submit"
+                        className={styles.formSubmit}
+                        >
+                        Submit
+                    </button>
+
                     </div>
                 </form>
+                </div>
+                 
             </div>
         </div>
     );
